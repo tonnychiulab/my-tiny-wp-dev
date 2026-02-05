@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Check Plugin",
+      "type": "shell",
+      "command": "php",
+      "args": [
+        "${workspaceFolder}/.tools/plugin-check/plugin-check.php",
+        "${fileDirname}"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
