@@ -1,0 +1,29 @@
+# .gitpod.yml - WordPress Plugin Development Environment
+vscode:
+  extensions:
+    - "bmewburn.vscode-intelephense-client"
+    - "esbenp.prettier-vscode"
+    - "xdebug.php-debug"
+    - "wordpress.wordpress-vscode"
+    - "github.copilot"
+
+tasks:
+  - name: "Setup Environment"
+    before: |
+      sudo apt-get update && sudo apt-get install -y zip
+      php -r "copy('https://getcomposer.org/installer', 'composer-setup.php' );"
+      sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+      php -r "unlink('composer-setup.php');"
+    init: |
+      echo "Preparing WordPress Plugin Check tool..."
+      git clone https://github.com/WordPress/plugin-check.git .tools/plugin-check
+      cd .tools/plugin-check && composer install
+    command: |
+      echo "\n========================================================"
+      echo "✅ WordPress Development Environment is Ready!"
+      echo "\n👉 To use Plugin Check:"
+      echo "   1. Right-click your plugin folder and 'Open in Integrated Terminal'."
+      echo "   2. Run command: php ../.tools/plugin-check/plugin-check.php ."
+      echo "\n🚀 Or, use the one-click task:"
+      echo "   Press Ctrl+Shift+P (Cmd+Shift+P ), type 'Tasks: Run Task', and select 'Check Plugin'."
+      echo "========================================================"
